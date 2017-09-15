@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.lb_StudNumber = new System.Windows.Forms.Label();
+            this.mtb_StudNumb = new System.Windows.Forms.MaskedTextBox();
+            this.but_Login = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lb_StudNumber
@@ -42,14 +44,37 @@
             this.lb_StudNumber.Text = "Введите номер студенческого:";
             this.lb_StudNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // mtb_StudNumb
+            // 
+            this.mtb_StudNumb.Location = new System.Drawing.Point(12, 80);
+            this.mtb_StudNumb.Mask = "00000000000000";
+            this.mtb_StudNumb.Name = "mtb_StudNumb";
+            this.mtb_StudNumb.Size = new System.Drawing.Size(376, 25);
+            this.mtb_StudNumb.TabIndex = 1;
+            this.mtb_StudNumb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // but_Login
+            // 
+            this.but_Login.Location = new System.Drawing.Point(158, 126);
+            this.but_Login.Name = "but_Login";
+            this.but_Login.Size = new System.Drawing.Size(75, 28);
+            this.but_Login.TabIndex = 2;
+            this.but_Login.Text = "Войти";
+            this.but_Login.UseVisualStyleBackColor = true;
+            this.but_Login.Click += new System.EventHandler(this.but_Login_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 167);
+            this.ClientSize = new System.Drawing.Size(400, 190);
+            this.Controls.Add(this.but_Login);
+            this.Controls.Add(this.mtb_StudNumb);
             this.Controls.Add(this.lb_StudNumber);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
@@ -60,6 +85,8 @@
         #endregion
 
         private System.Windows.Forms.Label lb_StudNumber;
+        private System.Windows.Forms.MaskedTextBox mtb_StudNumb;
+        private System.Windows.Forms.Button but_Login;
     }
 }
 

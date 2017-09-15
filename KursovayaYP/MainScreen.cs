@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace KursovayaYP
 {
-    public partial class Form1 : Form
+    public partial class MainScreen : Form
     {
-        public Form1()
+        public MainScreen()
         {
             InitializeComponent();
-        }
-
-        private void but_Login_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MainScreen screen = new MainScreen();
-            screen.Show();
         }
     }
 }
