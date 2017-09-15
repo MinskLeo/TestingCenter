@@ -16,5 +16,10 @@ namespace KursovayaYP
         {
             InitializeComponent();
         }
+
+        private void but_Login_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
