@@ -39,7 +39,7 @@
             this.lb_StudNumber.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lb_StudNumber.Location = new System.Drawing.Point(12, 26);
             this.lb_StudNumber.Name = "lb_StudNumber";
-            this.lb_StudNumber.Size = new System.Drawing.Size(376, 28);
+            this.lb_StudNumber.Size = new System.Drawing.Size(578, 42);
             this.lb_StudNumber.TabIndex = 0;
             this.lb_StudNumber.Text = "Введите номер студенческого:";
             this.lb_StudNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -49,7 +49,7 @@
             this.mtb_StudNumb.Location = new System.Drawing.Point(12, 80);
             this.mtb_StudNumb.Mask = "00000000000000";
             this.mtb_StudNumb.Name = "mtb_StudNumb";
-            this.mtb_StudNumb.Size = new System.Drawing.Size(376, 25);
+            this.mtb_StudNumb.Size = new System.Drawing.Size(578, 34);
             this.mtb_StudNumb.TabIndex = 1;
             this.mtb_StudNumb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -57,7 +57,7 @@
             // 
             this.but_Login.Location = new System.Drawing.Point(158, 126);
             this.but_Login.Name = "but_Login";
-            this.but_Login.Size = new System.Drawing.Size(75, 28);
+            this.but_Login.Size = new System.Drawing.Size(288, 28);
             this.but_Login.TabIndex = 2;
             this.but_Login.Text = "Войти";
             this.but_Login.UseVisualStyleBackColor = true;
@@ -65,9 +65,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 190);
+            this.ClientSize = new System.Drawing.Size(611, 167);
             this.Controls.Add(this.but_Login);
             this.Controls.Add(this.mtb_StudNumb);
             this.Controls.Add(this.lb_StudNumber);
@@ -77,6 +77,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
