@@ -19,7 +19,9 @@ namespace KursovayaYP
 
         private void but_Login_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MainScreen screen = new MainScreen();
+            screen.Show();
         }
     }
 }
