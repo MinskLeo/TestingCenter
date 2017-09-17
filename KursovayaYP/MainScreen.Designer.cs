@@ -70,12 +70,13 @@
             this.ClientSize = new System.Drawing.Size(725, 586);
             this.Controls.Add(this.gb_Buttons);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[Отчество][Имя][Фамилия] + [дата], [время]";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainScreen_FormClosing);
             this.gb_Buttons.ResumeLayout(false);
             this.ResumeLayout(false);
 
