@@ -75,7 +75,7 @@
             this.MinimizeBox = false;
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "[Отчество][Имя][Фамилия] + [дата], [время]";
+            this.Text = "[Отчество][Имя][Фамилия]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainScreen_FormClosing);
             this.gb_Buttons.ResumeLayout(false);
             this.ResumeLayout(false);

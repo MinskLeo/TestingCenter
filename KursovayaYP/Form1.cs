@@ -32,6 +32,8 @@ namespace KursovayaYP
     {
         TcpClient client = new TcpClient();
         private static int Port=8888;
+        public static string id;
+
         public Form1()
         {
             InitializeComponent();
@@ -76,9 +78,11 @@ namespace KursovayaYP
                 }
                 else
                 {
+                    //login_Фамилия_Имя_Отчество
                     string[] buf = answ.Split('_');
-                    MessageBox.Show("Добро пожаловать "+buf[0]+" "+buf[1],"База данных",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    MainScreen screen = new MainScreen();//Могут быть траблы)
+                    MessageBox.Show("Добро пожаловать "+buf[2]+" "+buf[3],"База данных",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MainScreen screen = new MainScreen(buf[1],buf[2],buf[3]);//Могут быть траблы)
+                    id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
                     screen.Show();
                     this.Hide();
                 }
