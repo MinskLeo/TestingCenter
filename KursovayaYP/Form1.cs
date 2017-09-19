@@ -79,10 +79,10 @@ namespace KursovayaYP
                 else
                 {
                     //login_Фамилия_Имя_Отчество
+                    id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
                     string[] buf = answ.Split('_');
                     MessageBox.Show("Добро пожаловать "+buf[2]+" "+buf[3],"База данных",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    MainScreen screen = new MainScreen(buf[1],buf[2],buf[3]);//Могут быть траблы)
-                    id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
+                    MainScreen screen = new MainScreen(buf[1],buf[2],buf[3], Convert.ToInt32(id), Port);//Могут быть траблы)
                     screen.Show();
                     this.Hide();
                 }

@@ -42,6 +42,7 @@
             this.but_NewTest.TabIndex = 1;
             this.but_NewTest.Text = "Новый тест";
             this.but_NewTest.UseVisualStyleBackColor = true;
+            this.but_NewTest.Click += new System.EventHandler(this.but_NewTest_Click);
             // 
             // but_Calc
             // 

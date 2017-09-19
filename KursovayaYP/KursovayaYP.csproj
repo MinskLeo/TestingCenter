@@ -74,6 +74,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestsList.Designer.cs">
+      <DependentUpon>TestsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestsScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TestsList.resx">
+      <DependentUpon>TestsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestsScreen.resx">
       <DependentUpon>TestsScreen.cs</DependentUpon>
     </EmbeddedResource>

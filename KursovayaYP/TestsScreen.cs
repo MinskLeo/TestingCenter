@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Sockets;
+using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,27 @@ namespace KursovayaYP
 {
     public partial class TestsScreen : Form
     {
-        public TestsScreen()
+        TcpClient client = new TcpClient();
+        private static int Port=8888;
+
+        public TestsScreen(int port)
         {
             InitializeComponent();
+            Port = port;
+        }
+
+        private void TestsScreen_Load(object sender, EventArgs e)
+        {
+            //Вопрос
+            //Кол-во ответов
+            //Ответ1
+            //ПравильностьОтвета1
+            //Ответ2
+            //ПравильностьОтвета2
+            //Ответ3
+            //ПравильностьОтвета3
+            client.Connect("127.0.0.1",Port);
+            
         }
     }
 }
