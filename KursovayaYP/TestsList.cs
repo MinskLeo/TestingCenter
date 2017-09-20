@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +17,10 @@ namespace KursovayaYP
     public partial class TestsList : Form
     {
         private static TcpClient tcp=new TcpClient();
-        private static int Port = 8888, ID;
+        private static int Port = 8888;
+        private static string ID;
 
-        public TestsList(int port, int id)
+        public TestsList(int port, string id)
         {
             InitializeComponent();
             //Тут 2 варианта развития событий:
@@ -25,23 +28,23 @@ namespace KursovayaYP
             //2.Грузимся после загрузки данной формы - не совсем логично, пока попробуем первый вариант
             Port = port;
             ID = id;
-            tcp.Connect("127.0.0.1",Port);
-            NetworkStream stream = tcp.GetStream();
-            string request = "testlist_"+ID;
-            string answer;
-            stream.Write(Encoding.UTF8.GetBytes(request),0,request.Length);
-            byte[] dat=new byte[256];
+        }
 
-            stream.Read(dat, 0, dat.Length);//Принимаем количество строчек (кол во тестов возможных)
-            answer = Encoding.UTF8.GetString(dat);//Конвертируем в UTF8 строку
-            for(int i=0;i<Convert.ToInt32(answer);i++)//Будем считывать с потока данные, и запихивать в список
+        private void TestsList_Load(object sender, EventArgs e)
+        {
+            tcp.Connect("127.0.0.1", Convert.ToInt32(Port));
+            NetworkStream stream = tcp.GetStream();
+            string request = "testslist_" + ID;
+            stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
+
+            while (!stream.DataAvailable)
             {
-                stream.Read(dat, 0, dat.Length);
-                answer = Encoding.UTF8.GetString(dat);
-                list_Tests.Items.Add(answer);
+                //Просто чтобы клиент подождал пока придет обработка с сервера
             }
-            stream.Close();//Закрываем поток
-            //p.s.Это поидее должно работать, когда допишем сервер, но я не уверен--------------------------------------------
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            string[] testslist = (string[])formatter.Deserialize(stream);
+            list_Tests.Items.AddRange(testslist);
         }
     }
 }

@@ -13,7 +13,9 @@ namespace KursovayaYP
     public partial class MainScreen : Form
     {
         private static string FirstName, Surname, MiddleName;
-        private static int Port, ID;
+        private static int Port;
+        private static string ID;
+        public static Form1 own;
 
         private void but_NewTest_Click(object sender, EventArgs e)
         {
@@ -22,7 +24,7 @@ namespace KursovayaYP
             testsList.Show();
         }
 
-        public MainScreen(string surname, string name, string middleName, int id, int port)//Не получается открывать то окно (логин скрин), которое мейновое, если закрыть это
+        public MainScreen(string surname, string name, string middleName, string id, int port)//Не получается открывать то окно (логин скрин), которое мейновое, если закрыть это
         {
             InitializeComponent();
             FirstName = name;
@@ -32,11 +34,18 @@ namespace KursovayaYP
             Port = port;
 
             this.Text = Surname + " " + FirstName + " " + MiddleName;
+
+            //Определяем владельца
+            own = this.Owner as Form1;
+            //P.S.Попытка провалилась
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if(own!=null)
+            {
+                own.Close();//Походу не воркает
+            }
         }
     }
 }
