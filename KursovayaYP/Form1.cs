@@ -72,7 +72,7 @@ namespace KursovayaYP
                 //ПРОВЕРИТЬ
                 MessageBox.Show("Ans: "+answ);
                 //NNN - Нету совпадений, [Имя]_[Отчество] - вход
-                if(answ.CompareTo("login_NNN")==0)
+                if(answ.CompareTo("login_NNN")==1)
                 {
                     MessageBox.Show("Студент не найден, повторите ввод", "База данных",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
