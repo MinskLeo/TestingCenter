@@ -65,6 +65,7 @@
             // 
             // Form1
             // 
+            this.AcceptButton = this.but_Login;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 167);

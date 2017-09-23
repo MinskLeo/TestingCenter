@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace KursovayaYP
             InitializeComponent();
             //Тут 2 варианта развития событий:
             //1.Грузимся в блоке с конструктором - трабл с экзепшоном может быть, если не будет коннекта
-            //2.Грузимся после загрузки данной формы - не совсем логично, пока попробуем первый вариант
+            //2.Грузимся после загрузки данной формы - не совсем логично, пока попробуем второй вариант
             Port = port;
             ID = id;
         }
@@ -34,17 +35,28 @@ namespace KursovayaYP
         {
             tcp.Connect("127.0.0.1", Convert.ToInt32(Port));
             NetworkStream stream = tcp.GetStream();
+            //ALL_DEBUG до слова ПРОВЕРИТЬ
+            StreamWriter NetWriter = new StreamWriter(stream);
             string request = "testslist_" + ID;
-            stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
+            NetWriter.WriteLine(request);
+            
 
-            while (!stream.DataAvailable)
-            {
-                //Просто чтобы клиент подождал пока придет обработка с сервера
-            }
+            //КАКИЕ ТО ТРАБЛЫ С ПРИЕМОМ. ДАЖЕ НЕ ОТКРЫВАЕТ ФОРМУ!!!!-----------------------------------------------------------ОЧЕНЬ ВАЖНО
+            //stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
 
+            //while (!stream.DataAvailable)
+            //{
+            //Просто чтобы клиент подождал пока придет обработка с сервера
+            //}
+
+            //ПРОВЕРИТЬ
             BinaryFormatter formatter = new BinaryFormatter();
             string[] testslist = (string[])formatter.Deserialize(stream);
             list_Tests.Items.AddRange(testslist);
+
+            //Закрываем потоки
+            //NetWriter.Close();
+            stream.Close();
         }
     }
 }
