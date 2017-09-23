@@ -49,60 +49,77 @@ namespace KursovayaYP
             {
                 //Можно добавить логированние в файлик
                 Port = 8888;
-                return;
-            }
-            finally
-            {
-                client.Connect("127.0.0.1", Port);
-            }
-        }
-
-        private void but_Login_Click(object sender, EventArgs e)
-        {
-            if (mtb_StudNumb.Text.Length == 14)
-            {
-                NetworkStream stream = client.GetStream();
-                byte[] message = Encoding.UTF8.GetBytes("login_"+mtb_StudNumb.Text);
-                stream.Write(message, 0, message.Length);//Специальная комбинация "оператор_данные": например, login_20169876654237
-                //DebuG & shit code
-                byte[] data = new byte[256];
-                stream.Read(data, 0, data.Length);
-                string answ = Encoding.UTF8.GetString(data,0,data.Length);
-
-                //ПРОВЕРИТЬ
-                MessageBox.Show("Ans: "+answ);
-                //NNN - Нету совпадений, [Имя]_[Отчество] - вход
-                if(answ.CompareTo("login_NNN")==1)
-                {
-                    MessageBox.Show("Студент не найден, повторите ввод", "База данных",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
-                else
-                {
-                    //login_Фамилия_Имя_Отчество
-                    id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
-                    string[] buf = answ.Split('_');
-                    MessageBox.Show("Добро пожаловать "+buf[2]+" "+buf[3],"База данных",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    MainScreen screen = new MainScreen(buf[1], buf[2], buf[3], id, Port)
-                    {
-                        Owner=this//НЕ ВОРКАЕТ "владелецевание"
-                    };//Могут быть траблы)
-                    screen.Show();
-                    this.Hide();
-                }
-                //Офаем прием
-                stream.Close();
-            //
-            }
-            else
-            {
-                MessageBox.Show("Заполните пожалуйста поле!","Ошибка",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Мб не будем сразу пытаться законнектиться к серверу? Пожалуй так и сделаю. Пока в комментарии, но потомы выкинем
 
+            /*try
+            {
+                client.Connect("127.0.0.1", Port);
+            }
+            catch(SocketException ex)
+            {
+                MessageBox.Show("Troubles with connecting. Server not responding.\n"+ex.Message, "Connecting", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
         }
+
+        private void but_Login_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (client.Connected == false)
+                {
+                    client.Connect("127.0.0.1", Port);
+                }
+                if (mtb_StudNumb.Text.Length == 14)
+                {
+                    NetworkStream stream = client.GetStream();
+                    byte[] message = Encoding.UTF8.GetBytes("login_" + mtb_StudNumb.Text);
+                    stream.Write(message, 0, message.Length);//Специальная комбинация "оператор_данные": например, login_20169876654237
+                                                             //DebuG & shit code
+                    byte[] data = new byte[256];
+                    stream.Read(data, 0, data.Length);
+                    string answ = Encoding.UTF8.GetString(data, 0, data.Length);
+
+                    //ПРОВЕРИТЬ
+                    MessageBox.Show("Ans: " + answ);
+                    //NNN - Нету совпадений, [Имя]_[Отчество] - вход
+                    if (answ.CompareTo("login_NNN") == 1)
+                    {
+                        MessageBox.Show("Студент не найден, повторите ввод", "База данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        //login_Фамилия_Имя_Отчество
+                        id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
+                        string[] buf = answ.Split('_');
+                        MessageBox.Show("Добро пожаловать " + buf[2] + " " + buf[3], "База данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MainScreen screen = new MainScreen(buf[1], buf[2], buf[3], id, Port)
+                        {
+                            Owner = this//НЕ ВОРКАЕТ "владелецевание"
+                        };//Могут быть траблы)
+                        screen.Show();
+                        this.Hide();
+                    }
+                    //Офаем прием
+                    stream.Close();
+                    //
+                }
+                else
+                {
+                    MessageBox.Show("Заполните пожалуйста поле!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch(SocketException ex)
+            {
+                MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {

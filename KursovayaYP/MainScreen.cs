@@ -17,13 +17,6 @@ namespace KursovayaYP
         private static string ID;
         public static Form1 own;
 
-        private void but_NewTest_Click(object sender, EventArgs e)
-        {
-            TestsList testsList = new TestsList(Port, ID);
-            this.Hide();
-            testsList.Show();
-        }
-
         public MainScreen(string surname, string name, string middleName, string id, int port)//Не получается открывать то окно (логин скрин), которое мейновое, если закрыть это
         {
             InitializeComponent();
@@ -38,6 +31,13 @@ namespace KursovayaYP
             //Определяем владельца
             own = this.Owner as Form1;
             //P.S.Попытка провалилась
+        }
+
+        private void but_NewTest_Click(object sender, EventArgs e)
+        {
+            TestsList testsList = new TestsList(Port, ID);
+            this.Hide();
+            testsList.Show();
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
