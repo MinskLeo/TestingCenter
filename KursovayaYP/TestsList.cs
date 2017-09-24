@@ -36,23 +36,25 @@ namespace KursovayaYP
             tcp.Connect("127.0.0.1", Convert.ToInt32(Port));
             NetworkStream stream = tcp.GetStream();
             //ALL_DEBUG до слова ПРОВЕРИТЬ
-            StreamWriter NetWriter = new StreamWriter(stream);
+            //StreamWriter NetWriter = new StreamWriter(stream);
             string request = "testslist_" + ID;
-            NetWriter.WriteLine(request);
-            
+
+            MessageBox.Show("request: " + request);//DEBUG
+            //NetWriter.WriteLine(request);
+
 
             //КАКИЕ ТО ТРАБЛЫ С ПРИЕМОМ. ДАЖЕ НЕ ОТКРЫВАЕТ ФОРМУ!!!!-----------------------------------------------------------ОЧЕНЬ ВАЖНО
-            //stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
+            stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
 
-            //while (!stream.DataAvailable)
-            //{
+            while (!stream.DataAvailable)
+            {
             //Просто чтобы клиент подождал пока придет обработка с сервера
-            //}
+            }
 
             //ПРОВЕРИТЬ
-            BinaryFormatter formatter = new BinaryFormatter();
-            string[] testslist = (string[])formatter.Deserialize(stream);
-            list_Tests.Items.AddRange(testslist);
+             BinaryFormatter formatter = new BinaryFormatter();
+             string[] testslist = (string[])formatter.Deserialize(stream);
+             list_Tests.Items.AddRange(testslist);
 
             //Закрываем потоки
             //NetWriter.Close();
