@@ -1,6 +1,6 @@
 ﻿namespace KursovayaYP
 {
-    partial class TestsScreen
+    partial class Test
     {
         /// <summary>
         /// Required designer variable.
@@ -33,26 +33,21 @@
             // 
             // textBox1
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(920, 207);
+            this.textBox1.Size = new System.Drawing.Size(476, 542);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "аыфаыфафыаф";
             // 
-            // TestsScreen
+            // Test
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 561);
+            this.ClientSize = new System.Drawing.Size(1018, 566);
             this.Controls.Add(this.textBox1);
-            this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "TestsScreen";
-            this.Text = "[Название_предмета] вопрос\\все_вопросы";
-            this.Load += new System.EventHandler(this.TestsScreen_Load);
+            this.Name = "Test";
+            this.Text = "[Название предмета]-[ФИО сдающего]";
+            this.Load += new System.EventHandler(this.Test_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

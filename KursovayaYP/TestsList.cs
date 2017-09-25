@@ -20,6 +20,7 @@ namespace KursovayaYP
         private static TcpClient tcp=new TcpClient();
         private static int Port = 8888;
         private static string ID;
+        private static string[] TEST;
 
         public TestsList(int port, string id)
         {
@@ -61,6 +62,44 @@ namespace KursovayaYP
                 //Закрываем потоки
                 //NetWriter.Close();
                 stream.Close();
+            }
+            catch(SocketException ex)
+            {
+                MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
+            }
+        }
+
+        private void but_Choose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TcpClient client = new TcpClient();
+                client.Connect("127.0.0.1", Port);
+                NetworkStream stream = client.GetStream();
+                byte[] message = Encoding.UTF8.GetBytes("tests_"+list_Tests.SelectedItem.ToString());
+                stream.Write(message,0,message.Length);
+                //Тут надо заресивить сам тест
+                BinaryFormatter formatter = new BinaryFormatter();
+                TEST = (string[])formatter.Deserialize(stream);
+                client.Close();
+                //Работаем с полученным материалом (от фокус группы)
+                if(TEST.Length!=0 || TEST==null)
+                {
+                    Test test = new Test(ID, TEST);
+                    this.Hide();
+                    test.Show();
+                }
+                else
+                {
+                    if(MessageBox.Show("Некорректный тест!","Тест", MessageBoxButtons.RetryCancel,MessageBoxIcon.Error)==DialogResult.Retry)
+                    {
+                        but_Choose_Click(sender, e);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
             }
             catch(SocketException ex)
             {

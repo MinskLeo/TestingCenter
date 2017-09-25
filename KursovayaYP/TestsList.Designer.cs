@@ -50,6 +50,7 @@
             this.but_Choose.TabIndex = 1;
             this.but_Choose.Text = "Выбрать";
             this.but_Choose.UseVisualStyleBackColor = true;
+            this.but_Choose.Click += new System.EventHandler(this.but_Choose_Click);
             // 
             // but_Cancel
             // 
@@ -70,7 +71,9 @@
             this.Controls.Add(this.list_Tests);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "TestsList";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TestsList";
             this.Load += new System.EventHandler(this.TestsList_Load);
             this.ResumeLayout(false);
