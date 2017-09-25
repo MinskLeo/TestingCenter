@@ -33,32 +33,39 @@ namespace KursovayaYP
 
         private void TestsList_Load(object sender, EventArgs e)
         {
-            tcp.Connect("127.0.0.1", Convert.ToInt32(Port));
-            NetworkStream stream = tcp.GetStream();
-            //ALL_DEBUG до слова ПРОВЕРИТЬ
-            //StreamWriter NetWriter = new StreamWriter(stream);
-            string request = "testslist_" + ID;
-
-            MessageBox.Show("request: " + request);//DEBUG
-            //NetWriter.WriteLine(request);
-
-            //Я возможно понял что за дичь. Я походу запрос не отправлял... Лол кик чибурик
-            //КАКИЕ ТО ТРАБЛЫ С ПРИЕМОМ. ДАЖЕ НЕ ОТКРЫВАЕТ ФОРМУ!!!!-----------------------------------------------------------ОЧЕНЬ ВАЖНО
-            stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
-
-            while (!stream.DataAvailable)
+            try
             {
-            //Просто чтобы клиент подождал пока придет обработка с сервера
+                tcp.Connect("127.0.0.1", Convert.ToInt32(Port));
+                NetworkStream stream = tcp.GetStream();
+                //ALL_DEBUG до слова ПРОВЕРИТЬ
+                //StreamWriter NetWriter = new StreamWriter(stream);
+                string request = "testslist_" + ID;
+
+                MessageBox.Show("request: " + request);//DEBUG
+                                                       //NetWriter.WriteLine(request);
+
+                //Я возможно понял что за дичь. Я походу запрос не отправлял... Лол кик чибурик
+                //КАКИЕ ТО ТРАБЛЫ С ПРИЕМОМ. ДАЖЕ НЕ ОТКРЫВАЕТ ФОРМУ!!!!-----------------------------------------------------------ОЧЕНЬ ВАЖНО
+                stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
+
+                while (!stream.DataAvailable)
+                {
+                    //Просто чтобы клиент подождал пока придет обработка с сервера
+                }
+
+                //ПРОВЕРИТЬ
+                BinaryFormatter formatter = new BinaryFormatter();
+                string[] testslist = (string[])formatter.Deserialize(stream);
+                list_Tests.Items.AddRange(testslist);
+
+                //Закрываем потоки
+                //NetWriter.Close();
+                stream.Close();
             }
-
-            //ПРОВЕРИТЬ
-             BinaryFormatter formatter = new BinaryFormatter();
-             string[] testslist = (string[])formatter.Deserialize(stream);
-             list_Tests.Items.AddRange(testslist);
-
-            //Закрываем потоки
-            //NetWriter.Close();
-            stream.Close();
+            catch(SocketException ex)
+            {
+                MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
+            }
         }
     }
 }

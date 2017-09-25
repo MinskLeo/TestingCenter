@@ -57,7 +57,6 @@ namespace KursovayaYP
             {
                 MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
             }
-
         }
 
         private void but_NewTest_Click(object sender, EventArgs e)

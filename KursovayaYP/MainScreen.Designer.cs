@@ -67,9 +67,18 @@
             // 
             // data_DataGrid
             // 
+            this.data_DataGrid.AllowUserToResizeColumns = false;
+            this.data_DataGrid.AllowUserToResizeRows = false;
+            this.data_DataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.data_DataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.data_DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.data_DataGrid.Location = new System.Drawing.Point(12, 12);
+            this.data_DataGrid.MultiSelect = false;
             this.data_DataGrid.Name = "data_DataGrid";
+            this.data_DataGrid.ReadOnly = true;
+            this.data_DataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.data_DataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.data_DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.data_DataGrid.Size = new System.Drawing.Size(562, 562);
             this.data_DataGrid.TabIndex = 4;
             // 
