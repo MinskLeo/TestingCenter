@@ -76,9 +76,14 @@ namespace KursovayaYP
                 TcpClient client = new TcpClient();
                 client.Connect("127.0.0.1", Port);
                 NetworkStream stream = client.GetStream();
-                byte[] message = Encoding.UTF8.GetBytes("tests_"+list_Tests.SelectedItem.ToString());
+                byte[] message = Encoding.UTF8.GetBytes("test_"+list_Tests.SelectedItem.ToString());
                 stream.Write(message,0,message.Length);
                 //Тут надо заресивить сам тест
+                while(!stream.DataAvailable)
+                {
+                    //Пождемс
+                }
+
                 BinaryFormatter formatter = new BinaryFormatter();
                 TEST = (string[])formatter.Deserialize(stream);
                 client.Close();
