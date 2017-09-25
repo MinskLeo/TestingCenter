@@ -42,7 +42,7 @@ namespace KursovayaYP
             MessageBox.Show("request: " + request);//DEBUG
             //NetWriter.WriteLine(request);
 
-
+            //Я возможно понял что за дичь. Я походу запрос не отправлял... Лол кик чибурик
             //КАКИЕ ТО ТРАБЛЫ С ПРИЕМОМ. ДАЖЕ НЕ ОТКРЫВАЕТ ФОРМУ!!!!-----------------------------------------------------------ОЧЕНЬ ВАЖНО
             stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
 

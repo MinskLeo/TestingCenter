@@ -31,7 +31,9 @@
             this.but_NewTest = new System.Windows.Forms.Button();
             this.but_Calc = new System.Windows.Forms.Button();
             this.gb_Buttons = new System.Windows.Forms.GroupBox();
+            this.data_DataGrid = new System.Windows.Forms.DataGridView();
             this.gb_Buttons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data_DataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // but_NewTest
@@ -63,12 +65,21 @@
             this.gb_Buttons.TabIndex = 3;
             this.gb_Buttons.TabStop = false;
             // 
+            // data_DataGrid
+            // 
+            this.data_DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.data_DataGrid.Location = new System.Drawing.Point(12, 12);
+            this.data_DataGrid.Name = "data_DataGrid";
+            this.data_DataGrid.Size = new System.Drawing.Size(562, 562);
+            this.data_DataGrid.TabIndex = 4;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(725, 586);
+            this.Controls.Add(this.data_DataGrid);
             this.Controls.Add(this.gb_Buttons);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -78,7 +89,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[Отчество][Имя][Фамилия]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainScreen_FormClosing);
+            this.Load += new System.EventHandler(this.MainScreen_Load);
             this.gb_Buttons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.data_DataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -87,5 +100,6 @@
         private System.Windows.Forms.Button but_NewTest;
         private System.Windows.Forms.Button but_Calc;
         private System.Windows.Forms.GroupBox gb_Buttons;
+        private System.Windows.Forms.DataGridView data_DataGrid;
     }
 }
