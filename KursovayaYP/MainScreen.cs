@@ -70,7 +70,7 @@ namespace KursovayaYP
         {
             if(own!=null)
             {
-                own.Close();//Походу не воркает
+                own.Show();//Походу не воркает
             }
         }
     }

@@ -46,6 +46,7 @@
             this.ClientSize = new System.Drawing.Size(1018, 566);
             this.Controls.Add(this.textBox1);
             this.Name = "Test";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[Название предмета]-[ФИО сдающего]";
             this.Load += new System.EventHandler(this.Test_Load);
             this.ResumeLayout(false);

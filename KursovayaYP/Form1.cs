@@ -120,6 +120,7 @@ namespace KursovayaYP
                         {
                             Owner = this//НЕ ВОРКАЕТ "владелецевание"
                         };//Могут быть траблы)
+                        screen.Disposed += new EventHandler(IfClosed);//----------Наше событие на закрытие формы
                         screen.Show();
                         this.Hide();
                     }
@@ -141,7 +142,11 @@ namespace KursovayaYP
             }
         }
 
-
+        private void IfClosed(object sender, EventArgs e)
+        {
+            MessageBox.Show("Закрываю Form1");
+            this.Close();
+        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
