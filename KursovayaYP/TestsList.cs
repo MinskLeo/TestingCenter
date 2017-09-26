@@ -88,7 +88,7 @@ namespace KursovayaYP
                 TEST = (string[])formatter.Deserialize(stream);
                 client.Close();
                 //Работаем с полученным материалом (от фокус группы)
-                if(TEST.Length!=0 || TEST==null)
+                if(TEST.Length!=0 || TEST!=null)
                 {
                     Test test = new Test(ID, TEST);
                     this.Hide();
