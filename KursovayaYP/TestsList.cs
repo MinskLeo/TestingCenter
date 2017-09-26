@@ -17,7 +17,7 @@ namespace KursovayaYP
 {
     public partial class TestsList : Form
     {
-        private static TcpClient tcp=new TcpClient();
+
         private static int Port = 8888;
         private static string ID;
         private static string[] TEST;
@@ -36,6 +36,7 @@ namespace KursovayaYP
         {
             try
             {
+                TcpClient tcp=new TcpClient();
                 tcp.Connect("127.0.0.1", Convert.ToInt32(Port));
                 NetworkStream stream = tcp.GetStream();
                 //ALL_DEBUG до слова ПРОВЕРИТЬ
@@ -62,6 +63,8 @@ namespace KursovayaYP
                 //Закрываем потоки
                 //NetWriter.Close();
                 stream.Close();
+                tcp.Close();
+
             }
             catch(SocketException ex)
             {
@@ -86,6 +89,7 @@ namespace KursovayaYP
 
                 BinaryFormatter formatter = new BinaryFormatter();
                 TEST = (string[])formatter.Deserialize(stream);
+                stream.Close();
                 client.Close();
                 //Работаем с полученным материалом (от фокус группы)
                 if(TEST.Length!=0 || TEST!=null)
@@ -110,6 +114,11 @@ namespace KursovayaYP
             {
                 MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
             }
+        }
+
+        private void but_Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

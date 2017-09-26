@@ -62,6 +62,8 @@ namespace KursovayaYP
         private void but_NewTest_Click(object sender, EventArgs e)
         {
             TestsList testsList = new TestsList(Port, ID);
+            testsList.Disposed += new System.EventHandler(TestListClosed);
+
             this.Hide();
             testsList.Show();
         }
@@ -73,5 +75,11 @@ namespace KursovayaYP
                 own.Show();//Походу не воркает
             }
         }
+
+            private void TestListClosed (object sender, EventArgs e)
+            {
+            this.Show();
+            }
+
     }
 }

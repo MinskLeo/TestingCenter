@@ -36,10 +36,10 @@
             // list_Tests
             // 
             this.list_Tests.FormattingEnabled = true;
-            this.list_Tests.ItemHeight = 18;
+            this.list_Tests.ItemHeight = 27;
             this.list_Tests.Location = new System.Drawing.Point(12, 12);
             this.list_Tests.Name = "list_Tests";
-            this.list_Tests.Size = new System.Drawing.Size(208, 364);
+            this.list_Tests.Size = new System.Drawing.Size(208, 355);
             this.list_Tests.TabIndex = 0;
             // 
             // but_Choose
@@ -60,10 +60,11 @@
             this.but_Cancel.TabIndex = 2;
             this.but_Cancel.Text = "Отмена";
             this.but_Cancel.UseVisualStyleBackColor = true;
+            this.but_Cancel.Click += new System.EventHandler(this.but_Cancel_Click);
             // 
             // TestsList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(232, 430);
             this.Controls.Add(this.but_Cancel);
