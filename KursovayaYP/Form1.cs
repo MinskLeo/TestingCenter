@@ -144,7 +144,6 @@ namespace KursovayaYP
 
         private void IfClosed(object sender, EventArgs e)
         {
-            MessageBox.Show("Закрываю Form1");
             this.Close();
         }
 

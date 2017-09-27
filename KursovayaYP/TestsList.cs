@@ -95,6 +95,7 @@ namespace KursovayaYP
                 if(TEST.Length!=0 || TEST!=null)
                 {
                     Test test = new Test(ID, TEST);
+                    test.Disposed += new EventHandler(IfClosed);
                     this.Hide();
                     test.Show();
                 }
@@ -114,6 +115,11 @@ namespace KursovayaYP
             {
                 MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
             }
+        }
+
+        private void IfClosed(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void but_Cancel_Click(object sender, EventArgs e)
