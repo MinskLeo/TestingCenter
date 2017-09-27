@@ -14,6 +14,7 @@ namespace KursovayaYP
     {
         private static string ID;
         private static string[] TEST;
+        //private static List<string> TEST=new List<string>();
 
         public Test(string id,string[] test)
         {

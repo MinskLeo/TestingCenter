@@ -21,6 +21,7 @@ namespace KursovayaYP
         private static int Port = 8888;
         private static string ID;
         private static string[] TEST;
+        //private static List<string> TEST=new List<string>();
 
         public TestsList(int port, string id)
         {
@@ -47,7 +48,6 @@ namespace KursovayaYP
                                                        //NetWriter.WriteLine(request);
 
                 //Я возможно понял что за дичь. Я походу запрос не отправлял... Лол кик чибурик
-                //КАКИЕ ТО ТРАБЛЫ С ПРИЕМОМ. ДАЖЕ НЕ ОТКРЫВАЕТ ФОРМУ!!!!-----------------------------------------------------------ОЧЕНЬ ВАЖНО
                 stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
 
                 while (!stream.DataAvailable)
@@ -57,8 +57,16 @@ namespace KursovayaYP
 
                 //ПРОВЕРИТЬ
                 BinaryFormatter formatter = new BinaryFormatter();
-                string[] testslist = (string[])formatter.Deserialize(stream);
-                list_Tests.Items.AddRange(testslist);
+                List<string> testslist = (List<string>)formatter.Deserialize(stream);
+                //Тут мы немного подредактируем названия, что нам придут. Дабы не было путей к файлам)
+                for(int i=0;i<testslist.Count;i++)
+                {
+                    //tests\POIT_3_Math.txt
+                    //buf[0] buf[1] buf[2] buf[3] buf[4]
+                    string[] buf = testslist[i].Split('\\','_','.');
+                    testslist[i] = buf[1] + "_" + buf[2] + "_" + buf[3];
+                }
+                list_Tests.Items.AddRange(testslist.ToArray());
 
                 //Закрываем потоки
                 //NetWriter.Close();
@@ -88,7 +96,7 @@ namespace KursovayaYP
                 }
 
                 BinaryFormatter formatter = new BinaryFormatter();
-                TEST = (string[])formatter.Deserialize(stream);
+                TEST = ((string[])formatter.Deserialize(stream));
                 stream.Close();
                 client.Close();
                 //Работаем с полученным материалом (от фокус группы)
