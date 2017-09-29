@@ -12,11 +12,13 @@ namespace KursovayaYP
 {
     public partial class Test : Form
     {
-        private static string ID;
-        private static string[] TEST;
+        private static string ID;//Наш ИД, по нему потом будет отправлять результаты
+        private static string[] TEST;//нужно что то сделать с этим массивом, он останется ненужный висеть в памяти
         //Поля самого теста
-        private int QuestionsCount;
-        private static Question[] questions;
+        private int QuestionsCount;//Количество вопросов
+        private static Question[] questions;//Массив с вопросами
+        private static Answer[] user_answers;//Ответы пользователя
+        private static int CURRENT;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
 
         public Test(string id,string[] test)
         {
@@ -28,7 +30,8 @@ namespace KursovayaYP
         private void Test_Load(object sender, EventArgs e)
         {
             QuestionsCount = Convert.ToInt32(TEST[0]);//Кол во вопросов
-            questions = new Question[QuestionsCount];//Определяем размер массива
+            questions = new Question[QuestionsCount];//Определяем размер массивов
+            user_answers = new Answer[QuestionsCount];
             for(int i=0;i<QuestionsCount;i++)
             {
                 flow_Questions.Controls.Add(new Button() { Text=(i+1).ToString(),AutoSize=true,AutoSizeMode=AutoSizeMode.GrowAndShrink});//DEBUG
@@ -40,6 +43,7 @@ namespace KursovayaYP
             for(int i=1;i<=QuestionsCount;i++)
             {
                 questions[i - 1] = new Question();
+                user_answers[i - 1] = new Answer();
                 questions[i - 1].question = TEST[k];
                 k++;//Переходим на строку с кол вом ответов
                 questions[i - 1].ansCount = Convert.ToInt32(TEST[k]);
@@ -52,7 +56,6 @@ namespace KursovayaYP
                 questions[i - 1].rightAnswers = TEST[k];
                 k++;//Переходим на строку с следующим вопросом
             }
-
         }
 
         private void LoadQuestion(int n)
@@ -133,15 +136,94 @@ namespace KursovayaYP
                     cb_6.Visible = true;
                     break;
             }
+            if(user_answers[n].answered)
+            {
+                string[] buf = user_answers[n].answer.Split(',');
+                for(int i=0;i<buf.Length;i++)
+                {
+                    switch(Convert.ToInt32(buf[i]))
+                    {
+                        case 1:
+                            cb_1.Checked = true;
+                            break;
+                        case 2:
+                            cb_2.Checked = true;
+                            break;
+                        case 3:
+                            cb_3.Checked = true;
+                            break;
+                        case 4:
+                            cb_4.Checked = true;
+                            break;
+                        case 5:
+                            cb_5.Checked = true;
+                            break;
+                        case 6:
+                            cb_6.Checked = true;
+                            break;
+                    }
+                }
+            }
         }
+
 
         private void FlowClick(object sender, EventArgs e)//Клик по кнопкам в нижней панели с вопросами
         {
-            //MessageBox.Show("Text: "+(sender as Button).Text); //DEBUG
-            int k = Convert.ToInt32((sender as Button).Text);
-            LoadQuestion(k-1);
-            //lb_Question.Text = questions[k-1].question;
-            //gb_Answers.Controls.Clear();
+            foreach(var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+            {
+                (a as CheckBox).Checked = false;
+            }
+            int k = Convert.ToInt32((sender as Button).Text);//Получаем наш номер элемента, который мы должны загрузить на форму
+            CURRENT = k;//Обновляем наше CURRENT
+            lb_Current.Text = CURRENT.ToString()+"/"+QuestionsCount.ToString();
+            LoadQuestion(k-1);//Вызываем метод на загрузку данных
+        }
+
+        private void but_Save_Click(object sender, EventArgs e)//Емае, заработало с первого раза
+        {
+            //CURRENT-1
+            user_answers[CURRENT - 1].answered = true;
+            int MoreThanOne = 0;
+            foreach(var a in gb_Answers.Controls)
+            {
+                if((a as CheckBox).Checked)
+                {
+                    MoreThanOne++;//Подсчитаем количество чекнутых боксов
+                }
+            }
+            int LastOne = 0;
+            foreach(var a in gb_Answers.Controls)
+            {
+                if((a as CheckBox).Checked)
+                {
+                    switch((a as CheckBox).Name)
+                    {
+                        case "cb_1":
+                            user_answers[CURRENT - 1].answer += "1";
+                            break;
+                        case "cb_2":
+                            user_answers[CURRENT - 1].answer += "2";
+                            break;
+                        case "cb_3":
+                            user_answers[CURRENT - 1].answer += "3";
+                            break;
+                        case "cb_4":
+                            user_answers[CURRENT - 1].answer += "4";
+                            break;
+                        case "cb_5":
+                            user_answers[CURRENT - 1].answer += "5";
+                            break;
+                        case "cb_6":
+                            user_answers[CURRENT - 1].answer += "6";
+                            break;
+                    }
+                    LastOne++;
+                    if(LastOne!=MoreThanOne)
+                    {
+                        user_answers[CURRENT - 1].answer += ",";
+                    }
+                }
+            }
         }
     }
 
