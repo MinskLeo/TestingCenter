@@ -14,17 +14,21 @@ namespace KursovayaYP
     {
         private static string ID;//Наш ИД, по нему потом будет отправлять результаты
         private static string[] TEST;//нужно что то сделать с этим массивом, он останется ненужный висеть в памяти
+        private static int Port=8888;
         //Поля самого теста
         private int QuestionsCount;//Количество вопросов
-        private static Question[] questions;//Массив с вопросами
-        private static Answer[] user_answers;//Ответы пользователя
+        public static Question[] questions;//Массив с вопросами
+        public static Answer[] user_answers;//Ответы пользователя
         private static int CURRENT;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
+        //
+        public static string StartTime = DateTime.Today.ToShortTimeString();//Время начала
 
-        public Test(string id,string[] test)
+        public Test(string id,string[] test, int port)
         {
             InitializeComponent();
             ID = id;
             TEST = test;
+            Port = port;
         }
 
         private void Test_Load(object sender, EventArgs e)
@@ -225,9 +229,29 @@ namespace KursovayaYP
                 }
             }
         }
+
+        private void but_End_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены?", "Завершение теста", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel)
+            {
+                return;
+            }
+            else
+            {
+                TestResults results = new TestResults(ID,QuestionsCount,Port);
+                results.Disposed += new EventHandler(IfClosed);
+                this.Hide();
+                results.Show();
+            }
+        }
+
+        private void IfClosed(object sender,EventArgs e)
+        {
+            this.Close();
+        }
     }
 
-    class Question
+    public class Question
     {
         public string question;//1 строка
         public int ansCount;//2 строка
@@ -238,7 +262,7 @@ namespace KursovayaYP
 
         }
     }
-    class Answer
+    public class Answer
     {
         public bool answered = false;
         public string answer;

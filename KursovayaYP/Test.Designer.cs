@@ -171,6 +171,7 @@
             this.but_End.TabIndex = 8;
             this.but_End.Text = "Завершить тест";
             this.but_End.UseVisualStyleBackColor = true;
+            this.but_End.Click += new System.EventHandler(this.but_End_Click);
             // 
             // but_Save
             // 

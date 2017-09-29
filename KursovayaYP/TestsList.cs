@@ -21,7 +21,7 @@ namespace KursovayaYP
         private static int Port = 8888;
         private static string ID;
         private static string[] TEST;
-        //private static List<string> TEST=new List<string>();
+        public static string TestName;//POIT_3_Math
 
         public TestsList(int port, string id)
         {
@@ -88,6 +88,7 @@ namespace KursovayaYP
                 client.Connect("127.0.0.1", Port);
                 NetworkStream stream = client.GetStream();
                 byte[] message = Encoding.UTF8.GetBytes("test_"+list_Tests.SelectedItem.ToString());
+                TestName = list_Tests.SelectedItem.ToString();//Название нашего теста
                 stream.Write(message,0,message.Length);
                 //Тут надо заресивить сам тест
                 while(!stream.DataAvailable)
@@ -102,7 +103,7 @@ namespace KursovayaYP
                 //Работаем с полученным материалом (от фокус группы)
                 if(TEST.Length!=0 || TEST!=null)
                 {
-                    Test test = new Test(ID, TEST);
+                    Test test = new Test(ID, TEST, Port);
                     test.Disposed += new EventHandler(IfClosed);
                     this.Hide();
                     test.Show();

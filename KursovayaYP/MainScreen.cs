@@ -34,6 +34,7 @@ namespace KursovayaYP
             //Определяем владельца
             own = this.Owner as Form1;
             //P.S.Попытка провалилась
+            this.Activated += new EventHandler(TableUpdating);
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace KursovayaYP
                 TcpClient client = new TcpClient();
                 client.Connect("127.0.0.1", Port);
                 NetworkStream stream = client.GetStream();
-                byte[] message = Encoding.UTF8.GetBytes("mainscreen_"+ID);
+                byte[] message = Encoding.UTF8.GetBytes("mainscreen_" + ID);
                 stream.Write(message, 0, message.Length);
 
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -53,7 +54,7 @@ namespace KursovayaYP
                 stream.Close();
                 client.Close();
             }
-            catch(SocketException ex)
+            catch (SocketException ex)
             {
                 MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
             }
@@ -80,6 +81,29 @@ namespace KursovayaYP
         {
             this.Show();
         }
+        
+        private void TableUpdating(object sender, EventArgs e)//DEBUG
+        {
+            try
+            {
+                TcpClient client = new TcpClient();
+                client.Connect("127.0.0.1", Port);
+                NetworkStream stream = client.GetStream();
+                byte[] message = Encoding.UTF8.GetBytes("mainscreen_" + ID);
+                stream.Write(message, 0, message.Length);
+                data_DataGrid.DataSource = null;//DEBUG
 
+                BinaryFormatter formatter = new BinaryFormatter();
+                DataSet set = (DataSet)formatter.Deserialize(stream);
+                data_DataGrid.DataSource = set.Tables[0];//Десериализируем объект из потока. Пытаемся емае
+
+                stream.Close();
+                client.Close();
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
+            }
+        }
     }
 }
