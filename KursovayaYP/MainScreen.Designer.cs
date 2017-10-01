@@ -93,6 +93,7 @@
             this.but_Update.TabIndex = 5;
             this.but_Update.Text = "Обновить";
             this.but_Update.UseVisualStyleBackColor = true;
+            this.but_Update.Click += new System.EventHandler(this.but_Update_Click);
             // 
             // groupBox1
             // 

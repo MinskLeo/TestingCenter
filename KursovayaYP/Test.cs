@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,9 +20,10 @@ namespace KursovayaYP
         private int QuestionsCount;//Количество вопросов
         public static Question[] questions;//Массив с вопросами
         public static Answer[] user_answers;//Ответы пользователя
-        private static int CURRENT;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
+        private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
         //
-        public static string StartTime = DateTime.Today.ToShortTimeString();//Время начала
+        public static string StartTime = DateTime.Now.ToShortTimeString();//Время начала
+        private static bool synchro = false;
 
         public Test(string id,string[] test, int port)
         {
@@ -29,10 +31,22 @@ namespace KursovayaYP
             ID = id;
             TEST = test;
             Port = port;
+            if(File.Exists("images\\next.png") && File.Exists("images\\prev.png"))//Делаем иконки на кнопках, если их в папке нету - не будет проблем
+            {
+                //340; 200
+                but_Previous.Text = "";
+                but_Previous.Size = new Size(68,34);
+                but_Previous.Location=new Point(340, 200);//Чуть чуть сдвигаем кнопочку
+                but_Previous.Image = new Bitmap("images\\prev.png");
+                but_Next.Text = "";
+                but_Next.Size = new Size(68, 34);
+                but_Next.Image = new Bitmap("images\\next.png");
+            }
         }
 
         private void Test_Load(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             QuestionsCount = Convert.ToInt32(TEST[0]);//Кол во вопросов
             questions = new Question[QuestionsCount];//Определяем размер массивов
             user_answers = new Answer[QuestionsCount];
@@ -60,6 +74,9 @@ namespace KursovayaYP
                 questions[i - 1].rightAnswers = TEST[k];
                 k++;//Переходим на строку с следующим вопросом
             }
+            LoadQuestion(0);
+            lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
+            this.Cursor = Cursors.Default;
         }
 
         private void LoadQuestion(int n)
@@ -228,6 +245,7 @@ namespace KursovayaYP
                     }
                 }
             }
+            flow_Questions.Controls[CURRENT - 1].BackColor = Color.Green;
         }
 
         private void but_End_Click(object sender, EventArgs e)
@@ -241,6 +259,7 @@ namespace KursovayaYP
                 TestResults results = new TestResults(ID,QuestionsCount,Port);
                 results.Disposed += new EventHandler(IfClosed);
                 this.Hide();
+                synchro = true;
                 results.Show();
             }
         }
@@ -248,6 +267,58 @@ namespace KursovayaYP
         private void IfClosed(object sender,EventArgs e)
         {
             this.Close();
+        }
+
+        private void but_Previous_Click(object sender, EventArgs e)//Чет с кнопками косяк какой то
+        {
+            /*
+            MessageBox.Show("CURRENT: "+CURRENT);//Чет с кнопками косяк какой то
+            if (CURRENT > 1)
+            {
+                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+                {
+                    (a as CheckBox).Checked = false;
+                }
+                LoadQuestion(CURRENT - 2);//DEBUG
+                CURRENT -= 2;
+                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
+            }*/
+        }
+
+        private void but_Next_Click(object sender, EventArgs e)//Чет с кнопками косяк какой то
+        {
+           /* MessageBox.Show("CURRENT: "+CURRENT);
+            if ((CURRENT-1)!=QuestionsCount-1)
+            {
+                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+                {
+                    (a as CheckBox).Checked = false;
+                }
+                LoadQuestion(CURRENT);//DEBUG
+                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
+            }
+            */
+        }
+
+        private void Test_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (synchro == false)
+            {
+                if (MessageBox.Show("Вы уверены?", "Завершение теста", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel)
+                {
+                    e.Cancel = true;//отменяем закрытие, мы сами будем в коде управлять закрытием форм
+                    return;
+                }
+                else
+                {
+                    TestResults results = new TestResults(ID, QuestionsCount, Port);
+                    results.Disposed += new EventHandler(IfClosed);
+                    this.Hide();
+                    e.Cancel = true;//отменяем закрытие, мы сами будем в коде управлять закрытием форм
+                    synchro = true;
+                    results.Show();
+                }
+            }
         }
     }
 

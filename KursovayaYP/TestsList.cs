@@ -72,7 +72,7 @@ namespace KursovayaYP
                 //NetWriter.Close();
                 stream.Close();
                 tcp.Close();
-
+                list_Tests.SelectedIndex = 0;
             }
             catch(SocketException ex)
             {

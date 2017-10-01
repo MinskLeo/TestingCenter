@@ -153,6 +153,7 @@
             this.but_Previous.TabIndex = 10;
             this.but_Previous.Text = "<";
             this.but_Previous.UseVisualStyleBackColor = true;
+            this.but_Previous.Click += new System.EventHandler(this.but_Previous_Click);
             // 
             // but_Next
             // 
@@ -162,6 +163,7 @@
             this.but_Next.TabIndex = 9;
             this.but_Next.Text = ">";
             this.but_Next.UseVisualStyleBackColor = true;
+            this.but_Next.Click += new System.EventHandler(this.but_Next_Click);
             // 
             // but_End
             // 
@@ -194,6 +196,7 @@
             // 
             // Test
             // 
+            this.AcceptButton = this.but_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 582);
@@ -206,10 +209,12 @@
             this.Controls.Add(this.gb_Answers);
             this.Controls.Add(this.lb_Question);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Test";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[Название предмета]-[ФИО сдающего]";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Test_FormClosing);
             this.Load += new System.EventHandler(this.Test_Load);
             this.gb_Answers.ResumeLayout(false);
             this.gb_Answers.PerformLayout();

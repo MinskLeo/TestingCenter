@@ -77,6 +77,11 @@ namespace KursovayaYP
             }
         }
 
+        private void but_Update_Click(object sender, EventArgs e)
+        {
+            TableUpdating(sender,e);
+        }
+
         private void TestListClosed (object sender, EventArgs e)
         {
             this.Show();
