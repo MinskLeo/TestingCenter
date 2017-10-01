@@ -44,6 +44,7 @@
             this.but_Save = new System.Windows.Forms.Button();
             this.lb_Current = new System.Windows.Forms.Label();
             this.timer_TickTock = new System.Windows.Forms.Timer(this.components);
+            this.lb_Time = new System.Windows.Forms.Label();
             this.gb_Answers.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,7 +190,7 @@
             // 
             // lb_Current
             // 
-            this.lb_Current.Location = new System.Drawing.Point(495, 9);
+            this.lb_Current.Location = new System.Drawing.Point(411, 9);
             this.lb_Current.Name = "lb_Current";
             this.lb_Current.Size = new System.Drawing.Size(138, 25);
             this.lb_Current.TabIndex = 11;
@@ -201,12 +202,22 @@
             this.timer_TickTock.Interval = 1000;
             this.timer_TickTock.Tick += new System.EventHandler(this.timer_TickTock_Tick);
             // 
+            // lb_Time
+            // 
+            this.lb_Time.Location = new System.Drawing.Point(562, 9);
+            this.lb_Time.Name = "lb_Time";
+            this.lb_Time.Size = new System.Drawing.Size(138, 25);
+            this.lb_Time.TabIndex = 12;
+            this.lb_Time.Text = "[time]";
+            this.lb_Time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Test
             // 
             this.AcceptButton = this.but_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 582);
+            this.Controls.Add(this.lb_Time);
             this.Controls.Add(this.lb_Current);
             this.Controls.Add(this.but_Previous);
             this.Controls.Add(this.but_Next);
@@ -246,5 +257,6 @@
         private System.Windows.Forms.Button but_Save;
         private System.Windows.Forms.Label lb_Current;
         private System.Windows.Forms.Timer timer_TickTock;
+        private System.Windows.Forms.Label lb_Time;
     }
 }

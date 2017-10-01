@@ -23,6 +23,7 @@ namespace KursovayaYP
         private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
         //
         public static DateTime StartTime = DateTime.Now;//Время начала
+        public static DateTime EndTime=DateTime.Now;
         private static bool synchro = false;
 
         public Test(string id,string[] test, int port)
@@ -47,7 +48,13 @@ namespace KursovayaYP
         private void Test_Load(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            QuestionsCount = Convert.ToInt32(TEST[0]);//Кол во вопросов
+            string[] buf = TEST[0].Split(';',':');
+            //2;1:0              вопросов;часы:минуты
+            EndTime = EndTime.AddHours(Convert.ToDouble(buf[1]));//Высчитываем время окончания
+            EndTime = EndTime.AddMinutes(Convert.ToDouble(buf[2]));
+
+
+            QuestionsCount = Convert.ToInt32(buf[0]);//Кол во вопросов
             questions = new Question[QuestionsCount];//Определяем размер массивов
             user_answers = new Answer[QuestionsCount];
             for(int i=0;i<QuestionsCount;i++)
@@ -77,6 +84,7 @@ namespace KursovayaYP
             LoadQuestion(0);
             lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
             this.Cursor = Cursors.Default;
+            timer_TickTock.Enabled = true;
         }
 
         private void LoadQuestion(int n)
@@ -324,6 +332,22 @@ namespace KursovayaYP
         private void timer_TickTock_Tick(object sender, EventArgs e)
         {
             DateTime time = DateTime.Now;//Закончить с таймером!!
+            lb_Time.Text = (EndTime.Hour - time.Hour).ToString() + ":" + (EndTime.Minute - time.Minute).ToString() + ":" + (EndTime.Second - time.Second).ToString();
+            if (time.CompareTo(EndTime)>=0)
+            {
+                timer_TickTock.Enabled = false;//Останавливаем тики
+                MessageBox.Show("Время вышло", "Тест", MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                TestResults results = new TestResults(ID, QuestionsCount, Port);
+                results.Disposed += new EventHandler(IfClosed);
+                this.Hide();
+                synchro = true;
+                results.Show();
+            }
+            if(time.Minute-EndTime.Minute==10)
+            {
+                MessageBox.Show("У вас осталось менее 10 минут", "Время", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
         }
     }
 
