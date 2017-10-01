@@ -22,7 +22,7 @@ namespace KursovayaYP
         public static Answer[] user_answers;//Ответы пользователя
         private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
         //
-        public static string StartTime = DateTime.Now.ToShortTimeString();//Время начала
+        public static DateTime StartTime = DateTime.Now;//Время начала
         private static bool synchro = false;
 
         public Test(string id,string[] test, int port)
@@ -319,6 +319,11 @@ namespace KursovayaYP
                     results.Show();
                 }
             }
+        }
+
+        private void timer_TickTock_Tick(object sender, EventArgs e)
+        {
+            DateTime time = DateTime.Now;//Закончить с таймером!!
         }
     }
 

@@ -86,7 +86,7 @@ namespace KursovayaYP
                 NetworkStream stream = tcp.GetStream();
                 //testresult_ID_Subject_Mark_Time
                 string[] buf = TestsList.TestName.Split('_');
-                byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+Test.StartTime);
+                byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+Test.StartTime.ToShortTimeString());//fsafsafas
                 stream.Write(message, 0, message.Length);
                 stream.Close();
                 tcp.Close();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lb_Question = new System.Windows.Forms.Label();
             this.gb_Answers = new System.Windows.Forms.GroupBox();
             this.cb_6 = new System.Windows.Forms.CheckBox();
@@ -42,6 +43,7 @@
             this.but_End = new System.Windows.Forms.Button();
             this.but_Save = new System.Windows.Forms.Button();
             this.lb_Current = new System.Windows.Forms.Label();
+            this.timer_TickTock = new System.Windows.Forms.Timer(this.components);
             this.gb_Answers.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -194,6 +196,11 @@
             this.lb_Current.Text = "[Текущий\\все]";
             this.lb_Current.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // timer_TickTock
+            // 
+            this.timer_TickTock.Interval = 1000;
+            this.timer_TickTock.Tick += new System.EventHandler(this.timer_TickTock_Tick);
+            // 
             // Test
             // 
             this.AcceptButton = this.but_Save;
@@ -238,5 +245,6 @@
         private System.Windows.Forms.Button but_End;
         private System.Windows.Forms.Button but_Save;
         private System.Windows.Forms.Label lb_Current;
+        private System.Windows.Forms.Timer timer_TickTock;
     }
 }
