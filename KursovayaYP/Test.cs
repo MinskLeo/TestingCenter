@@ -21,7 +21,6 @@ namespace KursovayaYP
         public static Question[] questions;//Массив с вопросами
         public static Answer[] user_answers;//Ответы пользователя
         private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
-        //
         public static DateTime StartTime = DateTime.Now;//Время начала
         public static DateTime EndTime=DateTime.Now;
         private static bool synchro = false;
@@ -254,6 +253,29 @@ namespace KursovayaYP
                 }
             }
             flow_Questions.Controls[CURRENT - 1].BackColor = Color.Green;
+
+
+           if (CURRENT - 1 < QuestionsCount - 1)
+            {
+                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+                  {
+                        (a as CheckBox).Checked = false;
+                  }
+
+                  LoadQuestion(CURRENT);//Вызываем метод на загрузку данных 
+                  lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
+                  CURRENT++;
+            }
+            else
+            {
+                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+                {
+                    (a as CheckBox).Checked = false;
+                }
+                CURRENT = 1;
+                LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
+                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();             
+            }
         }
 
         private void but_End_Click(object sender, EventArgs e)
@@ -279,33 +301,53 @@ namespace KursovayaYP
 
         private void but_Previous_Click(object sender, EventArgs e)//Чет с кнопками косяк какой то
         {
-            /*
-            MessageBox.Show("CURRENT: "+CURRENT);//Чет с кнопками косяк какой то
-            if (CURRENT > 1)
+
+            if (CURRENT - 1 == 0)
             {
                 foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
                 {
                     (a as CheckBox).Checked = false;
                 }
-                LoadQuestion(CURRENT - 2);//DEBUG
-                CURRENT -= 2;
+                CURRENT = QuestionsCount;
+                LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
                 lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
-            }*/
+            }
+            else
+            {
+                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+                {
+                    (a as CheckBox).Checked = false;
+                }
+                CURRENT--;
+                LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
+                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
+            }
+
         }
 
         private void but_Next_Click(object sender, EventArgs e)//Чет с кнопками косяк какой то
         {
-           /* MessageBox.Show("CURRENT: "+CURRENT);
-            if ((CURRENT-1)!=QuestionsCount-1)
+            if (CURRENT - 1 < QuestionsCount - 1)
             {
                 foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
                 {
                     (a as CheckBox).Checked = false;
                 }
-                LoadQuestion(CURRENT);//DEBUG
+
+                LoadQuestion(CURRENT);//Вызываем метод на загрузку данных 
+                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
+                CURRENT++;
+            }
+            else
+            {
+                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+                {
+                    (a as CheckBox).Checked = false;
+                }
+                CURRENT = 1;
+                LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
                 lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
             }
-            */
         }
 
         private void Test_FormClosing(object sender, FormClosingEventArgs e)
