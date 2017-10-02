@@ -38,11 +38,9 @@ namespace KursovayaYP
                 {
                     Correct++;
                 }
-                else
-                {
-                    Incorrect++;
-                }
             }
+
+            Incorrect = All - Correct;
             lb_Correct.Text = "Правильно: " +Correct+"/"+All;
             lb_Incorrect.Text = "Неправильно: " + Incorrect + "/" + All;
             Mark = ((100 * Correct) / All)/10;
