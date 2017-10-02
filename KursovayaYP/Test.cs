@@ -24,6 +24,9 @@ namespace KursovayaYP
         public static DateTime StartTime = DateTime.Now;//Время начала
         public static DateTime EndTime=DateTime.Now;
         private static bool synchro = false;
+        int hours = 0;
+        int minutes = 0;
+        int seconds = 0;
 
         public Test(string id,string[] test, int port)
         {
@@ -48,7 +51,11 @@ namespace KursovayaYP
         {
             this.Cursor = Cursors.WaitCursor;
             string[] buf = TEST[0].Split(';',':');
-            //2;1:0              вопросов;часы:минуты
+            //2;1:0:0              вопросов;часы:минуты:секунды
+            hours = Convert.ToInt32(buf[1]);
+            minutes = Convert.ToInt32(buf[2]);
+            seconds = Convert.ToInt32(buf[3]);
+
             EndTime = EndTime.AddHours(Convert.ToDouble(buf[1]));//Высчитываем время окончания
             EndTime = EndTime.AddMinutes(Convert.ToDouble(buf[2]));
 
@@ -373,24 +380,65 @@ namespace KursovayaYP
 
         private void timer_TickTock_Tick(object sender, EventArgs e)
         {
-            DateTime time = DateTime.Now;//Закончить с таймером!!
-            lb_Time.Text = (EndTime.Hour - time.Hour).ToString() + ":" + (EndTime.Minute - time.Minute).ToString() + ":" + (EndTime.Second - time.Second).ToString();
-            if (time.CompareTo(EndTime)>=0)
-            {
-                timer_TickTock.Enabled = false;//Останавливаем тики
-                MessageBox.Show("Время вышло", "Тест", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            string time;
+            time = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString();
 
+            lb_Time.Text = time;
+
+            if (minutes == 10 && seconds == 0)
+            {
+                timer_TickTock.Stop();
+                if (MessageBox.Show("У вас осталось менее 10 минут") == DialogResult.OK)
+                timer_TickTock.Start();
+            }
+
+            if (hours == 0 && minutes <= 10)
+            {
+                lb_Time.ForeColor = Color.Red;
+            }
+
+              if (hours == 0 && minutes == 0 && seconds == 0)
+              {
+                timer_TickTock.Enabled = false;
+                MessageBox.Show("Время вышло", "Тест", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TestResults results = new TestResults(ID, QuestionsCount, Port);
                 results.Disposed += new EventHandler(IfClosed);
                 this.Hide();
                 synchro = true;
                 results.Show();
-            }
-            if(time.Minute-EndTime.Minute==10)
+              }
+
+            if (minutes == 0)
             {
-                MessageBox.Show("У вас осталось менее 10 минут", "Время", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                if (hours == 0)
+                {
+                    hours = 0;
+                }
+                else
+                {
+                    hours--;
+                    minutes = 59;
+
+                }
             }
+
+            if (seconds == 0)
+            {
+                if (minutes == 0)
+                {
+                    minutes = 0;
+                }
+                else
+                {
+                    minutes--;
+                    seconds = 59;
+                }
+
+            }
+
+            seconds--;
         }
+
     }
 
     public class Question

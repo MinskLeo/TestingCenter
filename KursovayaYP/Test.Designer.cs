@@ -77,7 +77,7 @@
             this.cb_6.AutoSize = true;
             this.cb_6.Location = new System.Drawing.Point(30, 230);
             this.cb_6.Name = "cb_6";
-            this.cb_6.Size = new System.Drawing.Size(91, 22);
+            this.cb_6.Size = new System.Drawing.Size(142, 31);
             this.cb_6.TabIndex = 5;
             this.cb_6.Text = "answer_6";
             this.cb_6.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@
             this.cb_5.AutoSize = true;
             this.cb_5.Location = new System.Drawing.Point(30, 190);
             this.cb_5.Name = "cb_5";
-            this.cb_5.Size = new System.Drawing.Size(91, 22);
+            this.cb_5.Size = new System.Drawing.Size(142, 31);
             this.cb_5.TabIndex = 4;
             this.cb_5.Text = "answer_5";
             this.cb_5.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             this.cb_4.AutoSize = true;
             this.cb_4.Location = new System.Drawing.Point(30, 150);
             this.cb_4.Name = "cb_4";
-            this.cb_4.Size = new System.Drawing.Size(91, 22);
+            this.cb_4.Size = new System.Drawing.Size(142, 31);
             this.cb_4.TabIndex = 3;
             this.cb_4.Text = "answer_4";
             this.cb_4.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
             this.cb_3.AutoSize = true;
             this.cb_3.Location = new System.Drawing.Point(30, 110);
             this.cb_3.Name = "cb_3";
-            this.cb_3.Size = new System.Drawing.Size(91, 22);
+            this.cb_3.Size = new System.Drawing.Size(142, 31);
             this.cb_3.TabIndex = 2;
             this.cb_3.Text = "answer_3";
             this.cb_3.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             this.cb_2.AutoSize = true;
             this.cb_2.Location = new System.Drawing.Point(30, 70);
             this.cb_2.Name = "cb_2";
-            this.cb_2.Size = new System.Drawing.Size(91, 22);
+            this.cb_2.Size = new System.Drawing.Size(142, 31);
             this.cb_2.TabIndex = 1;
             this.cb_2.Text = "answer_2";
             this.cb_2.UseVisualStyleBackColor = true;
@@ -132,7 +132,7 @@
             this.cb_1.AutoSize = true;
             this.cb_1.Location = new System.Drawing.Point(30, 30);
             this.cb_1.Name = "cb_1";
-            this.cb_1.Size = new System.Drawing.Size(91, 22);
+            this.cb_1.Size = new System.Drawing.Size(142, 31);
             this.cb_1.TabIndex = 0;
             this.cb_1.Text = "answer_1";
             this.cb_1.UseVisualStyleBackColor = true;
@@ -208,13 +208,12 @@
             this.lb_Time.Name = "lb_Time";
             this.lb_Time.Size = new System.Drawing.Size(138, 25);
             this.lb_Time.TabIndex = 12;
-            this.lb_Time.Text = "[time]";
             this.lb_Time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Test
             // 
             this.AcceptButton = this.but_Save;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 582);
             this.Controls.Add(this.lb_Time);
@@ -256,7 +255,7 @@
         private System.Windows.Forms.Button but_End;
         private System.Windows.Forms.Button but_Save;
         private System.Windows.Forms.Label lb_Current;
-        private System.Windows.Forms.Timer timer_TickTock;
         private System.Windows.Forms.Label lb_Time;
+        public System.Windows.Forms.Timer timer_TickTock;
     }
 }
