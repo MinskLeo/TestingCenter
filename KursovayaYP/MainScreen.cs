@@ -15,7 +15,7 @@ namespace KursovayaYP
 {
     public partial class MainScreen : Form
     {
-        private static string FirstName, Surname, MiddleName;
+        public static string FirstName, Surname, MiddleName;
         private static int Port;
         private static string ID;
         public static Form1 own;

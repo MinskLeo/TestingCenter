@@ -44,9 +44,6 @@ namespace KursovayaYP
                 //StreamWriter NetWriter = new StreamWriter(stream);
                 string request = "testslist_" + ID;
 
-                MessageBox.Show("request: " + request);//DEBUG
-                                                       //NetWriter.WriteLine(request);
-
                 //Я возможно понял что за дичь. Я походу запрос не отправлял... Лол кик чибурик
                 stream.Write(Encoding.UTF8.GetBytes(request), 0, request.Length);
 

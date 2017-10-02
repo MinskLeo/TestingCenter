@@ -7,25 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 /**/
-using System.Threading;//Еще не юзали потоки
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
-
-/// <summary>
-/// ChangeLog:
-/// 1.Отправка данных на сервер работает
-/// 2.Клиент виснет, до тех пор пока не придет ответ. Придется клепать отдельный поток
-/// 3.Пофикшены многократные нажатия на кнопку. Все равно придется стопать мейновый поток, елси сервер не успевает осблужить. Нам не нужно многократное получение
-/// ответа. Так можно и хакнуть софт, через какие нибудь автокликеры. тупо забрутфорсить
-/// </summary>
 
 //Команды к\от серверу:
 //1.login_Id это логин скрин
 //2.testslist_Id получение списка тестов
-//ВНИМАНИЕ!!!!!!!!!!!
-//КЛИЕНТ, при ответе сервера и закрытии прилоежния ОСТАЕТСЯ ВИСЕТЬ В ОПЕРАТИВЕ!!!!!!!!!
 namespace KursovayaYP
 {
     public partial class Form1 : Form
@@ -57,20 +45,6 @@ namespace KursovayaYP
         private void Exit_button(object sender, EventArgs e)
         {
             this.Close();//Невидимая кнопка закрытия) Активируется тырком по Esc
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //Мб не будем сразу пытаться законнектиться к серверу? Пожалуй так и сделаю. Пока в комментарии, но потомы выкинем //DEBUG
-
-            /*try
-            {
-                client.Connect("127.0.0.1", Port);
-            }
-            catch(SocketException ex)
-            {
-                MessageBox.Show("Troubles with connecting. Server not responding.\n"+ex.Message, "Connecting", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
         }
 
         private void but_Login_Click(object sender, EventArgs e)
@@ -116,7 +90,7 @@ namespace KursovayaYP
                         id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
                         string[] buf = answ.Split('_');
                         MessageBox.Show("Добро пожаловать " + buf[1] + " " + buf[3], "База данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MainScreen screen = new MainScreen(buf[1], buf[2], buf[3], id, Port)
+                        MainScreen screen = new MainScreen(buf[2], buf[1], buf[3], id, Port)
                         {
                             Owner = this//НЕ ВОРКАЕТ "владелецевание"
                         };//Могут быть траблы)
@@ -145,11 +119,6 @@ namespace KursovayaYP
         private void IfClosed(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //client.Close();         //Пока не нид, у нас же открывается закрывается клиент в потоке
         }
     }
 }

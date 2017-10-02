@@ -22,11 +22,10 @@ namespace KursovayaYP
         public static Answer[] user_answers;//Ответы пользователя
         private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
         public static DateTime StartTime = DateTime.Now;//Время начала
-        public static DateTime EndTime=DateTime.Now;
         private static bool synchro = false;
-        int hours = 0;
-        int minutes = 0;
-        int seconds = 0;
+        private int hours = 0;
+        private int minutes = 0;
+        private int seconds = 0;
 
         public Test(string id,string[] test, int port)
         {
@@ -50,15 +49,12 @@ namespace KursovayaYP
         private void Test_Load(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            this.Text = TestsList.TestName+" - "+MainScreen.Surname+" "+MainScreen.FirstName + " " + MainScreen.MiddleName;//Чет не хочет больше символов выводить... Видать ограничение
             string[] buf = TEST[0].Split(';',':');
             //2;1:0:0              вопросов;часы:минуты:секунды
             hours = Convert.ToInt32(buf[1]);
             minutes = Convert.ToInt32(buf[2]);
             seconds = Convert.ToInt32(buf[3]);
-
-            EndTime = EndTime.AddHours(Convert.ToDouble(buf[1]));//Высчитываем время окончания
-            EndTime = EndTime.AddMinutes(Convert.ToDouble(buf[2]));
-
 
             QuestionsCount = Convert.ToInt32(buf[0]);//Кол во вопросов
             questions = new Question[QuestionsCount];//Определяем размер массивов
@@ -216,6 +212,19 @@ namespace KursovayaYP
 
         private void but_Save_Click(object sender, EventArgs e)//Емае, заработало с первого раза
         {
+            bool exit = false;
+            foreach(var a in gb_Answers.Controls)
+            {
+                if((a as CheckBox).Checked)
+                {
+                    exit = true;
+                }
+            }
+            if (exit == false)
+            {
+                MessageBox.Show("Выберите хотя бы один вариант ответа", "Тест",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
             //CURRENT-1
             user_answers[CURRENT - 1].answered = true;
             int MoreThanOne = 0;
@@ -261,28 +270,7 @@ namespace KursovayaYP
             }
             flow_Questions.Controls[CURRENT - 1].BackColor = Color.Green;
 
-
-           if (CURRENT - 1 < QuestionsCount - 1)
-            {
-                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
-                  {
-                        (a as CheckBox).Checked = false;
-                  }
-
-                  LoadQuestion(CURRENT);//Вызываем метод на загрузку данных 
-                  lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
-                  CURRENT++;
-            }
-            else
-            {
-                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
-                {
-                    (a as CheckBox).Checked = false;
-                }
-                CURRENT = 1;
-                LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
-                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();             
-            }
+            but_Next_Click(sender, e);
         }
 
         private void but_End_Click(object sender, EventArgs e)
@@ -308,23 +296,19 @@ namespace KursovayaYP
 
         private void but_Previous_Click(object sender, EventArgs e)//Чет с кнопками косяк какой то
         {
+            foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+            {
+                (a as CheckBox).Checked = false;
+            }
 
             if (CURRENT - 1 == 0)
             {
-                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
-                {
-                    (a as CheckBox).Checked = false;
-                }
                 CURRENT = QuestionsCount;
                 LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
                 lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
             }
             else
             {
-                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
-                {
-                    (a as CheckBox).Checked = false;
-                }
                 CURRENT--;
                 LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
                 lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
@@ -334,23 +318,19 @@ namespace KursovayaYP
 
         private void but_Next_Click(object sender, EventArgs e)//Чет с кнопками косяк какой то
         {
+            foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
+            {
+                (a as CheckBox).Checked = false;
+            }
+
             if (CURRENT - 1 < QuestionsCount - 1)
             {
-                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
-                {
-                    (a as CheckBox).Checked = false;
-                }
-
                 LoadQuestion(CURRENT);//Вызываем метод на загрузку данных 
-                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
                 CURRENT++;
+                lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
             }
             else
             {
-                foreach (var a in gb_Answers.Controls)//Чистим чекбоксы для следующего вопроса
-                {
-                    (a as CheckBox).Checked = false;
-                }
                 CURRENT = 1;
                 LoadQuestion(CURRENT - 1);//Вызываем метод на загрузку данных 
                 lb_Current.Text = CURRENT.ToString() + "/" + QuestionsCount.ToString();
@@ -380,15 +360,14 @@ namespace KursovayaYP
 
         private void timer_TickTock_Tick(object sender, EventArgs e)
         {
-            string time;
-            time = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString();
+            string time = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString();
 
             lb_Time.Text = time;
 
             if (minutes == 10 && seconds == 0)
             {
                 timer_TickTock.Stop();
-                if (MessageBox.Show("У вас осталось менее 10 минут") == DialogResult.OK)
+                if (MessageBox.Show("У вас осталось менее 10 минут","Время",MessageBoxButtons.OK,MessageBoxIcon.Information) == DialogResult.OK)
                 timer_TickTock.Start();
             }
 
