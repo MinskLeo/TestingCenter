@@ -45,11 +45,11 @@ namespace KursovayaYP
             lb_Incorrect.Text = "Неправильно: " + Incorrect + "/" + All;
             Mark = ((100 * Correct) / All)/10;
             lb_Mark.Text = Mark.ToString();
-            if(Mark>5)
+            if(Mark>4)
             {
                 lb_Mark.ForeColor = Color.Green;
             }
-            else if(Mark==5)
+            else if(Mark==4)
             {
                 lb_Mark.ForeColor = Color.Yellow;
             }
