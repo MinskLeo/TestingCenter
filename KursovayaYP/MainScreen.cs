@@ -79,7 +79,19 @@ namespace KursovayaYP
 
         private void but_Update_Click(object sender, EventArgs e)
         {
-            TableUpdating(sender,e);
+            //TableUpdating(sender,e); //Прошлый вариант - запрос на сервер актуальной таблицы
+            DataTable NewOne = new DataTable();
+            for(int i=0;i<data_DataGrid.Rows.Count-1;i++)
+            {
+                DateTime buf = DateTime.Parse(data_DataGrid.Rows[i].Cells[1].Value.ToString());
+                if (buf >= dateTime_From.Value && buf <= dateTime_To.Value) //buf>=dateTime_From.Value && buf<=dateTime_To.Value
+                {
+                    //NewOne.Rows.Add(data_DataGrid.Rows[i]);
+                    MessageBox.Show("Совпадение: "+ data_DataGrid.Rows[i].Cells[1].Value.ToString());
+                }
+            }
+            data_DataGrid.DataSource = NewOne;
+            MessageBox.Show("Обновлено!");
         }
 
         private void TestListClosed (object sender, EventArgs e)

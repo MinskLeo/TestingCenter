@@ -34,6 +34,8 @@
             this.data_DataGrid = new System.Windows.Forms.DataGridView();
             this.but_Update = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTime_From = new System.Windows.Forms.DateTimePicker();
+            this.dateTime_To = new System.Windows.Forms.DateTimePicker();
             this.gb_Buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data_DataGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -97,12 +99,30 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dateTime_To);
+            this.groupBox1.Controls.Add(this.dateTime_From);
             this.groupBox1.Controls.Add(this.but_Update);
             this.groupBox1.Location = new System.Drawing.Point(580, 167);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(133, 151);
+            this.groupBox1.Size = new System.Drawing.Size(133, 163);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
+            // 
+            // dateTime_From
+            // 
+            this.dateTime_From.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_From.Location = new System.Drawing.Point(16, 78);
+            this.dateTime_From.Name = "dateTime_From";
+            this.dateTime_From.Size = new System.Drawing.Size(106, 25);
+            this.dateTime_From.TabIndex = 6;
+            // 
+            // dateTime_To
+            // 
+            this.dateTime_To.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_To.Location = new System.Drawing.Point(16, 119);
+            this.dateTime_To.Name = "dateTime_To";
+            this.dateTime_To.Size = new System.Drawing.Size(106, 25);
+            this.dateTime_To.TabIndex = 7;
             // 
             // MainScreen
             // 
@@ -136,5 +156,7 @@
         private System.Windows.Forms.DataGridView data_DataGrid;
         private System.Windows.Forms.Button but_Update;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker dateTime_To;
+        private System.Windows.Forms.DateTimePicker dateTime_From;
     }
 }
