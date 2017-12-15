@@ -33,7 +33,6 @@ namespace KursovayaYP
             //Подсчет результата
             for (int i = 0; i < All; i++)
             {
-                //MessageBox.Show(Test.user_answers[i].answer);   //DEBUG
                 if (Test.questions[i].rightAnswers.Equals(Test.user_answers[i].answer))
                 {
                     Correct++;
@@ -84,7 +83,7 @@ namespace KursovayaYP
                 NetworkStream stream = tcp.GetStream();
                 //testresult_ID_Subject_Mark_Time
                 string[] buf = TestsList.TestName.Split('_');
-                byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+Test.StartTime.ToShortTimeString());//fsafsafas
+                byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+Test.StartTime.ToShortTimeString());
                 stream.Write(message, 0, message.Length);
                 stream.Close();
                 tcp.Close();

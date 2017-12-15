@@ -1,24 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-/**/
 using System.IO;
 using System.Net.Sockets;
 using System.Windows.Forms;
 
-//Команды к\от серверу:
-//1.login_Id это логин скрин
-//2.testslist_Id получение списка тестов
 namespace KursovayaYP
 {
     public partial class Form1 : Form
     {
-        //TcpClient client = new TcpClient();//Попробуемс перенсти в метод, дабы небыло косяков с коннектом
         private static int Port=8888;
         public static string id;
         private static Button EXIT = new Button();
@@ -61,26 +50,15 @@ namespace KursovayaYP
                 if (mtb_StudNumb.Text.Length == 14)
                 {
                     NetworkStream stream = client.GetStream();
-                    //попробуемс принять через нормальные потоки        //DEBUG--------------------------------------------НУЖНО ИСПОЛЬЗОВАТЬ ОТДЕЛЬНЫЙ ПОТОК! ПОИСК МОЖЕТ ЗАТЯНУТЬСЯ!
-                     //StreamWriter NetWriter = new StreamWriter(stream);//Создали поток для записи
-                     //NetWriter.WriteLine("login_" + mtb_StudNumb.Text);
-                     //NetWriter.Flush();
-                     //StreamReader NetReader = new StreamReader(stream);
-                     //string answ=NetReader.ReadLine();
-                     //NetReader.Close();
-                     //NetWriter.Close();
-                    //Ниже до слов ПРОВЕРИТЬ закомментил, для теста //DEBUG //P.S. ВРОДЕ ПОКА ВОРКАЕТ, Но комменты не убираем - "вдруг все грохнется" (С) Демидович
                      byte[] message = Encoding.UTF8.GetBytes("login_" + mtb_StudNumb.Text);
                      stream.Write(message, 0, message.Length);//Специальная комбинация "оператор_данные": например, login_20169876654237
-                                                             //DebuG & shit code
+
                      byte[] data = new byte[256];
                      stream.Read(data, 0, data.Length);
                      string answ = Encoding.UTF8.GetString(data, 0, data.Length);
 
-                    //ПРОВЕРИТЬ
-                    //MessageBox.Show("Ans: " + answ);          //DEBUG
                     //NNN - Нету совпадений, [Имя]_[Отчество] - вход
-                    if (answ.Equals("login_NNN"))//answ.CompareTo("login_NNN") == 1
+                    if (answ.CompareTo("login_NNN")==0)//[TEST] answ.ToString().Equals("login_NNN")
                     {
                         MessageBox.Show("Студент не найден, повторите ввод", "База данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -90,10 +68,7 @@ namespace KursovayaYP
                         id = mtb_StudNumb.Text;//Запоминаем идентификатор студента
                         string[] buf = answ.Split('_');
                         MessageBox.Show("Добро пожаловать " + buf[1] + " " + buf[3], "База данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MainScreen screen = new MainScreen(buf[2], buf[1], buf[3], id, Port)
-                        {
-                            Owner = this//НЕ ВОРКАЕТ "владелецевание"
-                        };//Могут быть траблы)
+                        MainScreen screen = new MainScreen(buf[2], buf[1], buf[3], id, Port);
                         screen.Disposed += new EventHandler(IfClosed);//----------Наше событие на закрытие формы
                         screen.Show();
                         this.Hide();

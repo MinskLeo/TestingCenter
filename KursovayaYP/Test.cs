@@ -22,7 +22,7 @@ namespace KursovayaYP
         public static Answer[] user_answers;//Ответы пользователя
         private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1!!!!
         public static DateTime StartTime = DateTime.Now;//Время начала
-        private static bool synchro = false;
+        private static bool synchro = false;//т.к. при нажатии креста в углу возникает событие FormClosing, и т.к. оно же возникает при окончании теста, была созданна данная переменная, для верной синхронизации появления событий
         private int hours = 0;
         private int minutes = 0;
         private int seconds = 0;
@@ -35,10 +35,9 @@ namespace KursovayaYP
             Port = port;
             if(File.Exists("images\\next.png") && File.Exists("images\\prev.png"))//Делаем иконки на кнопках, если их в папке нету - не будет проблем
             {
-                //340; 200
                 but_Previous.Text = "";
                 but_Previous.Size = new Size(68,34);
-                but_Previous.Location=new Point(340, 200);//Чуть чуть сдвигаем кнопочку
+                but_Previous.Location=new Point(340, 200);
                 but_Previous.Image = new Bitmap("images\\prev.png");
                 but_Next.Text = "";
                 but_Next.Size = new Size(68, 34);
@@ -49,7 +48,7 @@ namespace KursovayaYP
         private void Test_Load(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            this.Text = TestsList.TestName+" - "+MainScreen.Surname+" "+MainScreen.FirstName + " " + MainScreen.MiddleName;//Чет не хочет больше символов выводить... Видать ограничение
+            this.Text = TestsList.TestName+" - "+MainScreen.Surname+" "+MainScreen.FirstName + " " + MainScreen.MiddleName;
             string[] buf = TEST[0].Split(';',':');
             //2;1:0:0              вопросов;часы:минуты:секунды
             hours = Convert.ToInt32(buf[1]);
@@ -65,7 +64,7 @@ namespace KursovayaYP
                 flow_Questions.Controls[i].Click += new EventHandler(FlowClick);
             }
 
-            //Тут мы мутим наш массив с вопросами-----------P.S.Тут будет грязно)
+            //массив с вопросами создаем тут
             int k = 1;//Наша прыгалка по строчкам
             for(int i=1;i<=QuestionsCount;i++)
             {
