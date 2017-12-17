@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Net;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KursovayaYP
@@ -17,10 +11,10 @@ namespace KursovayaYP
         private static string ID;
         private static int Port=8888;
         //-------------
-        private static int All = 0;//Общее количество вопросов. Чтобы получить место в массиве ОТНИМАЕМ 1!!!
+        private static int All = 0;//Общее количество вопросов. Чтобы получить место в массиве ОТНИМАЕМ 1
         private static int Correct=0;//Правильных
         private static int Incorrect = 0;//Неправильных
-        private static int Mark=0;
+        private static int Mark=0;//Оценка за тест
         //
         private static bool synchro=false;
 
@@ -30,20 +24,23 @@ namespace KursovayaYP
             ID = id;
             All = all;
             Port = port;
-            //Подсчет результата
+            //Подсчет результатов через сравнение пользовательского ответа с верным
             for (int i = 0; i < All; i++)
             {
                 if (Test.questions[i].rightAnswers.Equals(Test.user_answers[i].answer))
                 {
-                    Correct++;
+                    Correct++;//Инкрементация переменной, считающей правильные ответы
                 }
             }
 
-            Incorrect = All - Correct;
-            lb_Correct.Text = "Правильно: " +Correct+"/"+All;
+            Incorrect = All - Correct;//Подсчет неправильно отвеченных вопросов
+
+
+            lb_Correct.Text = "Правильно: " +Correct+"/"+All;//Записываем значения переменных полученных выше в информационные элементы
             lb_Incorrect.Text = "Неправильно: " + Incorrect + "/" + All;
-            Mark = ((100 * Correct) / All)/10;
-            lb_Mark.Text = Mark.ToString();
+            Mark = ((100 * Correct) / All)/10;//Рассчет оценки
+            lb_Mark.Text = Mark.ToString();//Вывод оценки пользователю
+            //Далее следуют три блока, отвечающих за более красивое отображение результата в зависимости от полученной оценки
             if(Mark>4)
             {
                 lb_Mark.ForeColor = Color.Green;
@@ -62,19 +59,19 @@ namespace KursovayaYP
         {
             if (synchro == false)
             {
-                UploadingInformation();
+                UploadingInformation();//Метод, вызываемый при закрытии формы, отправляющий результаты на сервер
             }
         }
 
         private void but_Exit_Click(object sender, EventArgs e)
         {
-            but_Exit.Enabled = false;
-            UploadingInformation();
+            but_Exit.Enabled = false;//Не разрешаем польователю нажать на кнопку несколько раз, чтобы исключить множественную отправку результатов на сервер
+            UploadingInformation();//Вызываем метод на отправку результатов на сервер
             synchro = true;
             this.Close();
         }
 
-        private void UploadingInformation()
+        private void UploadingInformation()//Метод, вызываемый при закрытии формы, отправляющий результаты на сервер
         {
             try
             {
@@ -85,12 +82,13 @@ namespace KursovayaYP
                 string[] buf = TestsList.TestName.Split('_');
                 byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+Test.StartTime.ToShortTimeString());
                 stream.Write(message, 0, message.Length);
+                //Закрытие потоков
                 stream.Close();
                 tcp.Close();
             }
             catch(SocketException ex)
             {
-                MessageBox.Show("Ошибка подключения. Сервер не отвечает.\n" + ex.Message + "\n" + ex.StackTrace, "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);//DEBUG
+                MessageBox.Show("Ошибка подключения. Сервер не отвечает.", "Подключение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 but_Exit.Enabled = true;
             }
             finally

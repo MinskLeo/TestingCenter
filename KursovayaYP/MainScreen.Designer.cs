@@ -163,8 +163,7 @@
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[Отчество][Имя][Фамилия]";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainScreen_FormClosing);
-            this.Load += new System.EventHandler(this.MainScreen_Load);
+            this.Load += new System.EventHandler(this.AllMarks);
             this.gb_Buttons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data_DataGrid)).EndInit();
             this.groupBox1.ResumeLayout(false);
