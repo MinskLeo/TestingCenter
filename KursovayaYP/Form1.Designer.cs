@@ -36,10 +36,10 @@
             // lb_StudNumber
             // 
             this.lb_StudNumber.AutoSize = true;
-            this.lb_StudNumber.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lb_StudNumber.Location = new System.Drawing.Point(12, 26);
+            this.lb_StudNumber.Font = new System.Drawing.Font("Constantia", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lb_StudNumber.Location = new System.Drawing.Point(5, 26);
             this.lb_StudNumber.Name = "lb_StudNumber";
-            this.lb_StudNumber.Size = new System.Drawing.Size(467, 28);
+            this.lb_StudNumber.Size = new System.Drawing.Size(702, 49);
             this.lb_StudNumber.TabIndex = 0;
             this.lb_StudNumber.Text = "Введите номер студенческого билета:";
             this.lb_StudNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -49,7 +49,7 @@
             this.mtb_StudNumb.Location = new System.Drawing.Point(137, 78);
             this.mtb_StudNumb.Mask = "00000000000000";
             this.mtb_StudNumb.Name = "mtb_StudNumb";
-            this.mtb_StudNumb.Size = new System.Drawing.Size(217, 25);
+            this.mtb_StudNumb.Size = new System.Drawing.Size(217, 34);
             this.mtb_StudNumb.TabIndex = 1;
             this.mtb_StudNumb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -66,13 +66,16 @@
             // Form1
             // 
             this.AcceptButton = this.but_Login;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(481, 167);
             this.Controls.Add(this.but_Login);
             this.Controls.Add(this.mtb_StudNumb);
             this.Controls.Add(this.lb_StudNumber);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

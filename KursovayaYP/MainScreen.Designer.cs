@@ -108,7 +108,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 149);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 18);
+            this.label2.Size = new System.Drawing.Size(51, 27);
             this.label2.TabIndex = 10;
             this.label2.Text = "По:";
             // 
@@ -117,7 +117,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 118);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(24, 18);
+            this.label1.Size = new System.Drawing.Size(38, 27);
             this.label1.TabIndex = 9;
             this.label1.Text = "С:";
             // 
@@ -136,7 +136,7 @@
             this.dateTime_To.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTime_To.Location = new System.Drawing.Point(48, 149);
             this.dateTime_To.Name = "dateTime_To";
-            this.dateTime_To.Size = new System.Drawing.Size(106, 25);
+            this.dateTime_To.Size = new System.Drawing.Size(106, 34);
             this.dateTime_To.TabIndex = 7;
             // 
             // dateTime_From
@@ -144,12 +144,12 @@
             this.dateTime_From.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTime_From.Location = new System.Drawing.Point(48, 118);
             this.dateTime_From.Name = "dateTime_From";
-            this.dateTime_From.Size = new System.Drawing.Size(106, 25);
+            this.dateTime_From.Size = new System.Drawing.Size(106, 34);
             this.dateTime_From.TabIndex = 6;
             // 
             // MainScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(777, 586);
@@ -157,6 +157,7 @@
             this.Controls.Add(this.data_DataGrid);
             this.Controls.Add(this.gb_Buttons);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

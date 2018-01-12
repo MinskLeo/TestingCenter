@@ -36,10 +36,10 @@
             // list_Tests
             // 
             this.list_Tests.FormattingEnabled = true;
-            this.list_Tests.ItemHeight = 18;
+            this.list_Tests.ItemHeight = 27;
             this.list_Tests.Location = new System.Drawing.Point(12, 12);
             this.list_Tests.Name = "list_Tests";
-            this.list_Tests.Size = new System.Drawing.Size(208, 346);
+            this.list_Tests.Size = new System.Drawing.Size(208, 328);
             this.list_Tests.TabIndex = 0;
             // 
             // but_Choose
@@ -66,14 +66,17 @@
             // TestsList
             // 
             this.AcceptButton = this.but_Choose;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.CancelButton = this.but_Cancel;
             this.ClientSize = new System.Drawing.Size(232, 430);
+            this.ControlBox = false;
             this.Controls.Add(this.but_Cancel);
             this.Controls.Add(this.but_Choose);
             this.Controls.Add(this.list_Tests);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "TestsList";

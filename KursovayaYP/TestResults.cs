@@ -96,5 +96,10 @@ namespace KursovayaYP
                 but_Exit.Enabled = true;
             }
         }
+
+        private void TestResults_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

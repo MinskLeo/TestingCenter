@@ -215,7 +215,9 @@
             this.AcceptButton = this.but_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1165, 582);
+            this.ControlBox = false;
             this.Controls.Add(this.lb_Time);
             this.Controls.Add(this.lb_Current);
             this.Controls.Add(this.but_Previous);
@@ -226,7 +228,7 @@
             this.Controls.Add(this.gb_Answers);
             this.Controls.Add(this.lb_Question);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Test";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

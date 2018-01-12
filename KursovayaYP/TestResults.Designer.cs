@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.gb_Results = new System.Windows.Forms.GroupBox();
-            this.lb_Correct = new System.Windows.Forms.Label();
-            this.lb_Incorrect = new System.Windows.Forms.Label();
             this.lb_Mark = new System.Windows.Forms.Label();
+            this.lb_Incorrect = new System.Windows.Forms.Label();
+            this.lb_Correct = new System.Windows.Forms.Label();
             this.but_Exit = new System.Windows.Forms.Button();
             this.gb_Results.SuspendLayout();
             this.SuspendLayout();
@@ -47,24 +47,6 @@
             this.gb_Results.TabIndex = 0;
             this.gb_Results.TabStop = false;
             // 
-            // lb_Correct
-            // 
-            this.lb_Correct.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lb_Correct.Location = new System.Drawing.Point(6, 54);
-            this.lb_Correct.Name = "lb_Correct";
-            this.lb_Correct.Size = new System.Drawing.Size(312, 41);
-            this.lb_Correct.TabIndex = 0;
-            this.lb_Correct.Text = "Правильно:[n\\всех]";
-            // 
-            // lb_Incorrect
-            // 
-            this.lb_Incorrect.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lb_Incorrect.Location = new System.Drawing.Point(6, 107);
-            this.lb_Incorrect.Name = "lb_Incorrect";
-            this.lb_Incorrect.Size = new System.Drawing.Size(312, 41);
-            this.lb_Incorrect.TabIndex = 1;
-            this.lb_Incorrect.Text = "Неправильно:[n\\всех]";
-            // 
             // lb_Mark
             // 
             this.lb_Mark.Font = new System.Drawing.Font("Consolas", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -74,6 +56,24 @@
             this.lb_Mark.TabIndex = 2;
             this.lb_Mark.Text = "100";
             this.lb_Mark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lb_Incorrect
+            // 
+            this.lb_Incorrect.Font = new System.Drawing.Font("Constantia", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lb_Incorrect.Location = new System.Drawing.Point(10, 107);
+            this.lb_Incorrect.Name = "lb_Incorrect";
+            this.lb_Incorrect.Size = new System.Drawing.Size(312, 41);
+            this.lb_Incorrect.TabIndex = 1;
+            this.lb_Incorrect.Text = "Неправильно:[n\\всех]";
+            // 
+            // lb_Correct
+            // 
+            this.lb_Correct.Font = new System.Drawing.Font("Constantia", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lb_Correct.Location = new System.Drawing.Point(37, 54);
+            this.lb_Correct.Name = "lb_Correct";
+            this.lb_Correct.Size = new System.Drawing.Size(281, 41);
+            this.lb_Correct.TabIndex = 0;
+            this.lb_Correct.Text = "Правильно:[n\\всех]";
             // 
             // but_Exit
             // 
@@ -87,20 +87,23 @@
             // 
             // TestResults
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(443, 371);
+            this.ControlBox = false;
             this.Controls.Add(this.but_Exit);
             this.Controls.Add(this.gb_Results);
             this.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TestResults";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Результаты теста";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TestResults_FormClosing);
+            this.Load += new System.EventHandler(this.TestResults_Load);
             this.gb_Results.ResumeLayout(false);
             this.ResumeLayout(false);
 
