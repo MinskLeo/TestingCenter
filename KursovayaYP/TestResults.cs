@@ -13,8 +13,8 @@ namespace KursovayaYP
         //-------------
         private static int All = 0;//Общее количество вопросов. Чтобы получить место в массиве ОТНИМАЕМ 1
         private static int Correct=0;//Правильных
-        private static int Incorrect = 0;//Неправильных
         private static int Mark=0;//Оценка за тест
+        private static DateTime StartTime = DateTime.Now;//Время начала
         //
         private static bool synchro=false;
 
@@ -33,11 +33,8 @@ namespace KursovayaYP
                 }
             }
 
-            Incorrect = All - Correct;//Подсчет неправильно отвеченных вопросов
-
-
             lb_Correct.Text = "Правильно: " +Correct+"/"+All;//Записываем значения переменных полученных выше в информационные элементы
-            lb_Incorrect.Text = "Неправильно: " + Incorrect + "/" + All;
+            lb_Incorrect.Text = "Неправильно: " + (All - Correct) + "/" + All;
             Mark = ((100 * Correct) / All)/10;//Рассчет оценки
             lb_Mark.Text = Mark.ToString();//Вывод оценки пользователю
             //Далее следуют три блока, отвечающих за более красивое отображение результата в зависимости от полученной оценки
@@ -80,7 +77,7 @@ namespace KursovayaYP
                 NetworkStream stream = tcp.GetStream();
                 //testresult_ID_Subject_Mark_Time
                 string[] buf = TestsList.TestName.Split('_');
-                byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+Test.StartTime.ToShortTimeString());
+                byte[] message = Encoding.UTF8.GetBytes("testresult_" + ID+"_"+buf[2]+"_"+Mark+"_"+StartTime.ToShortTimeString());
                 stream.Write(message, 0, message.Length);
                 //Закрытие потоков
                 stream.Close();

@@ -21,7 +21,6 @@ namespace KursovayaYP
         public static Question[] questions;//Массив с вопросами
         public static Answer[] user_answers;//Ответы пользователя
         private static int CURRENT=1;//Текущий вопрос, чтобы получить место в массиве ОТНЯТЬ 1
-        public static DateTime StartTime = DateTime.Now;//Время начала
         private static bool synchro = false;//т.к. при нажатии креста в углу возникает событие FormClosing, и т.к. оно же возникает при окончании теста, была созданна данная переменная, для верной синхронизации появления событий
         private int hours = 0;
         private int minutes = 0;
@@ -393,18 +392,18 @@ namespace KursovayaYP
               }
 
             if (minutes == 0)//Управляем переменными времени
+        {
+            if (hours == 0)
             {
-                if (hours == 0)
-                {
-                    hours = 0;
-                }
-                else
-                {
-                    hours--;
-                    minutes = 59;
-
-                }
+                hours = 0;
             }
+            else
+            {
+                hours--;
+                minutes = 59;
+
+            }
+        }
 
             if (seconds == 0)
             {
@@ -417,10 +416,10 @@ namespace KursovayaYP
                     minutes--;
                     seconds = 59;
                 }
-
             }
-
             seconds--;
+            
+
         }
 
     }
